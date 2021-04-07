@@ -5,7 +5,7 @@ import { setBoard } from '../store/Action'
 
 function BoardCol (props) {
   const dispatch = useDispatch()
-  const { boards } = useSelector(state => state)
+  const { boards, initialBoard } = useSelector(state => state)
   const { boardCol } = props
   const image= { uri: "https://images.pexels.com/photos/220166/pexels-photo-220166.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
   function handleInput(input) {
@@ -20,7 +20,7 @@ function BoardCol (props) {
         <View style={ styles.border }>
           <ImageBackground source={image} style={styles.image}>
             {
-              boardCol.value === 0 ? <TextInput style={styles.input} keyboardType={'number-pad'} maxLength={1} onChangeText={(text) => handleInput(text)} /> :
+              initialBoard[boardCol.y][boardCol.x] === 0 ? <TextInput style={styles.input} defaultValue={boardCol.value > 0 ? String(boardCol.value) : ''} keyboardType={'number-pad'} maxLength={1} onChangeText={(text) => handleInput(text)} /> :
               <Text style={styles.text}>{boardCol.value}</Text>
             }
           </ImageBackground>
@@ -28,7 +28,7 @@ function BoardCol (props) {
         <View style={ styles.border2 }>
         <ImageBackground source={image} style={styles.image}>
           {
-            boardCol.value === 0 ? <TextInput style={styles.input} keyboardType={'number-pad'} maxLength={1} onChangeText={(text) => handleInput(text)} /> :
+            initialBoard[boardCol.y][boardCol.x] === 0 ? <TextInput style={styles.input} defaultValue={boardCol.value > 0 ? String(boardCol.value) : ''} keyboardType={'number-pad'} maxLength={1} onChangeText={(text) => handleInput(text)} /> :
             <Text style={styles.text}>{boardCol.value}</Text>
           }
         </ImageBackground>
