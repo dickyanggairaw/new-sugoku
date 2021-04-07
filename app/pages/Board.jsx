@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, View, Text, StyleSheet, Image } from 'react-native';
+import { Button, View, StyleSheet, Image } from 'react-native';
 import BoardGame from '../components/Board'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBoard, validated, auto } from '../store/Action'
@@ -10,17 +10,6 @@ export default function Board ({route, navigation}) {
   useEffect(() => {
     dispatch(fetchBoard(dificult))
   }, [])
-  useEffect(() => {
-    if(validate) {
-      if(validate === 'solved'){
-        navigation.replace('Finish', {
-          name
-        })
-      }else {
-        alert(validate)
-      }
-    }    
-  }, [validate])
   const { name, dificult} = route.params
   function validateBoard () {
     dispatch(validated(boards))
@@ -46,7 +35,6 @@ export default function Board ({route, navigation}) {
       <View style={styles.buttonRow}>
         <View style={styles.button}>
           <Button
-            style={styles.button2}
             title="Validate"
             onPress={validateBoard}
           />
@@ -57,7 +45,21 @@ export default function Board ({route, navigation}) {
             onPress={autoSolve}
           />
         </View> 
-      </View>         
+      </View>   
+      {
+        validate ? 
+        <Button
+          color= "green"
+          title="Finish"
+          onPress={() => navigation.replace('Finish', {
+                  name
+                })}
+        /> :
+        <Button
+          title="unFinish"
+          disabled
+        />
+      }      
     </View>
   )
 }
@@ -73,10 +75,9 @@ const styles = StyleSheet.create({
     margin:10
   },
   buttonRow: {
-    flexDirection: 'row'
-  },
-  button2: {
-    backgroundColor: 'red'
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'stretch'
   },
   image: {
     width: 305, 

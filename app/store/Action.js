@@ -30,7 +30,12 @@ export function validated(boards) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   })
     .then(response => response.json())
-    .then(response => dispatch(setValidate(response.status)))
+    .then(response => {
+      if(response.status === "solved"){
+        dispatch(setValidate(true))
+      }
+      alert(response.status)
+    })
     .catch(console.warn)
   }  
 }

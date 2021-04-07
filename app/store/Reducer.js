@@ -1,10 +1,7 @@
-import { State } from "react-native-gesture-handler"
-import store from "."
-
 const initialState = {
   boards: [],
   loading: false,
-  validate: '',
+  validate: false,
   initialBoard: []
 }
 

@@ -5,6 +5,17 @@ export default function Home ({navigation}) {
   const [name, setName] = useState('')
   const [dificult, setDificult] = useState('easy')
 
+  function validateName() {
+    if(name) {
+      navigation.navigate('Board', {
+        name: name,
+        dificult: dificult
+      })
+    }else {
+      alert("name has required")
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -16,11 +27,9 @@ export default function Home ({navigation}) {
           <Picker.Item label="hard" value="hard" />
         </Picker>
         <Button
+          color= 'blue'
           title="Play Game"
-          onPress={() => navigation.navigate('Board', {
-            name: name,
-            dificult: dificult
-          })}
+          onPress={validateName}
         />
       </View>
     </View>
